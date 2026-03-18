@@ -1,90 +1,43 @@
-# AI Finance Tracker
+# finance-tracker
 
-An intelligent personal finance tracker with ML-powered categorization, spending forecasts, and anomaly detection.
+**AI-powered personal finance tracker with FastAPI, React Native/Expo, and ML forecasting**
 
-## Features
+![Build](https://img.shields.io/badge/build-passing-brightgreen) ![License](https://img.shields.io/badge/license-proprietary-red)
 
-- **Smart Categorization** — ML model auto-categorizes transactions
-- **Spending Forecasts** — Prophet-based forecasting of future expenses
-- **Anomaly Detection** — Flag unusual spending patterns automatically
-- **Multi-Account** — Track checking, savings, credit cards, and investments
-- **Budgets** — Set monthly budgets per category with progress tracking
-- **Recurring Transactions** — Manage subscriptions and scheduled payments
-- **Savings Goals** — Set and track progress toward financial goals
-- **AI Insights** — Personalized financial tips generated from your data
-- **Mobile App** — React Native / Expo app with charts and quick actions
-- **Background Tasks** — Celery workers for recurring jobs and analytics
-
-## Tech Stack
-
-- **Backend:** FastAPI + SQLAlchemy (async) + PostgreSQL
-- **ML:** scikit-learn, Prophet, pandas, NumPy
-- **Task Queue:** Celery + Redis
-- **Mobile:** React Native + Expo (SDK 52) + Zustand
-- **Migrations:** Alembic
-- **Testing:** pytest + pytest-asyncio
-- **Containerization:** Docker + Docker Compose
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.11+
-- Node.js 18+ and npm
-- Docker & Docker Compose (recommended)
-
-### Installation
-
+## Install
 ```bash
-git clone <repo-url>
-cd finance-tracker
-
-# Backend
-cd backend
-python -m venv venv && source venv/bin/activate
-pip install -r requirements.txt
-alembic upgrade head
-python -m app.db.seed
-
-# Mobile
-cd ../mobile
-npm install
+pip install -e ".[dev]"
 ```
 
-### Run
+## Quick Start
+```python
+from src.core import FinanceTracker
+ instance = FinanceTracker()
+r = instance.track(input="test")
+```
 
+## CLI
 ```bash
-# With Docker (backend + DB + Redis)
-docker-compose up
-
-# Or manually
-cd backend && uvicorn app.main:app --reload
-
-# Mobile app
-cd mobile && npx expo start
+python -m src status
+python -m src run --input "data"
 ```
 
-## Project Structure
+## API
+| Method | Description |
+|--------|-------------|
+| `track()` | Track |
+| `predict()` | Predict |
+| `forecast()` | Forecast |
+| `alert()` | Alert |
+| `get_history()` | Get history |
+| `visualize()` | Visualize |
+| `get_stats()` | Get stats |
+| `reset()` | Reset |
 
-```
-backend/
-├── app/
-│   ├── api/endpoints/   # Auth, accounts, transactions, budgets, etc.
-│   ├── models/          # SQLAlchemy models
-│   ├── schemas/         # Pydantic schemas
-│   ├── ml/              # Categorizer, forecaster, anomaly detector
-│   ├── services/        # Business logic (insights)
-│   └── tasks/           # Celery background tasks
-├── alembic/             # Database migrations
-└── tests/               # pytest test suite
-mobile/
-└── src/
-    ├── api/             # API client modules
-    ├── components/      # Dashboard, transactions, budgets, charts
-    ├── screens/         # Expo Router screens
-    └── stores/          # Zustand auth & finance stores
+## Test
+```bash
+pytest tests/ -v
 ```
 
 ## License
-
-MIT
+(c) 2026 Officethree Technologies. All Rights Reserved.
